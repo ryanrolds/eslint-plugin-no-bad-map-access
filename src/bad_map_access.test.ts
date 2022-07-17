@@ -1,5 +1,5 @@
 import {ESLintUtils} from '@typescript-eslint/utils';
-import {badMapAccess} from "./bad_map_access";
+import {noBadMapAccess} from "./bad_map_access";
 
 const ruleTester = new ESLintUtils.RuleTester({
   parser: '@typescript-eslint/parser',
@@ -9,7 +9,7 @@ const ruleTester = new ESLintUtils.RuleTester({
   },
 });
 
-ruleTester.run('flag accessing of Map properties', badMapAccess, {
+ruleTester.run('flag accessing of Map properties', noBadMapAccess, {
   valid: [
     {
       code: 'const m = new Map(); m.set("foo", 1);',
@@ -52,7 +52,7 @@ ruleTester.run('flag accessing of Map properties', badMapAccess, {
   ]
 });
 
-ruleTester.run('object and lodash methods', badMapAccess, {
+ruleTester.run('object and lodash methods', noBadMapAccess, {
   valid: [
     {
       code: `const m = new Map();

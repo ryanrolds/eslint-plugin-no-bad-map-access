@@ -10,19 +10,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryanrolds/eslint-bad-map-access.git"
+    "url": "git+https://github.com/ryanrolds/eslint-plugin-no-bad-map-access.git"
   },
   "keywords": [
     "eslint",
     "typescript",
-    "map"
+    "map",
+    "es6"
   ],
-  "author": "ryanrolds@gmail.com",
+  "author": "Ryan R. Olds <ryan.r.olds@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ryanrolds/eslint-bad-map-access/issues"
+    "url": "https://github.com/ryanrolds/eslint-plugin-no-bad-map-access/issues"
   },
-  "homepage": "https://github.com/ryanrolds/eslint-bad-map-access#readme",
+  "homepage": "https://github.com/ryanrolds/eslint-plugin-no-bad-map-access#readme",
   "dependencies": {
     "eslint": "^8.20.0",
     "@typescript-eslint/parser": "^5.30.6",
