@@ -22,7 +22,7 @@ export const badMapAccess = createRule({
         const objectNode = parserServices.esTreeNodeToTSNodeMap.get(node.object);
         const objectType = checker.getTypeAtLocation(objectNode);
 
-        if (objectType.symbol.escapedName === "Map") {
+        if (objectType.symbol?.escapedName === "Map") {
           context.report({
             messageId: 'badMapAccess',
             node: node,

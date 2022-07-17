@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "outDir": "./built",
-    "allowJs": true,
-    "target": "es2017",
+    "allowJs": false,
+    "target": "es6",
     "rootDir": "./src",
+    "module": "CommonJS",
+    "esModuleInterop": false,
     "sourceMap": false,
-    "esModuleInterop": true,
     "moduleResolution": "node",
   },
   "include": [
