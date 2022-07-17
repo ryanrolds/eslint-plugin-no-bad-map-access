@@ -77,7 +77,7 @@ export const noBadMapAccess = createRule({
       }
     };
   },
-  name: 'bad-map-access',
+  name: 'no-bad-map-access',
   meta: {
     type: 'suggestion',
     docs: {
