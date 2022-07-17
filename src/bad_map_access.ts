@@ -6,9 +6,10 @@ const createRule = ESLintUtils.RuleCreator(
   name => `https://example.com/rule/${name}`,
 );
 
-
 const allowedMethods = ['set', 'get', 'has', 'delete', 'forEach', 'clear', 'size',
   'entities', 'keys', 'values'];
+
+const foriddenObjectNames = ['Object', '_', 'lodash']
 
 // Type: RuleModule<"badMapAccess", ...>
 export const badMapAccess = createRule({
@@ -35,7 +36,11 @@ export const badMapAccess = createRule({
           });
         }
       },
-      'CallExpression > MemberExpression > Identifier[name="Object"]'(node: Identifier) {
+      'CallExpression > MemberExpression > Identifier'(node: Identifier) {
+        if (foriddenObjectNames.indexOf(node.name) === -1) {
+          return;
+        }
+
         const memberExpression = node.parent as MemberExpression;
         const callExpression = memberExpression.parent as CallExpression;
 

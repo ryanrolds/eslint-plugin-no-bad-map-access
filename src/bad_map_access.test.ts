@@ -52,7 +52,7 @@ ruleTester.run('flag accessing of Map properties', badMapAccess, {
   ]
 });
 
-ruleTester.run('object methods', badMapAccess, {
+ruleTester.run('object and lodash methods', badMapAccess, {
   valid: [
     {
       code: `const m = new Map();
@@ -70,17 +70,32 @@ ruleTester.run('object methods', badMapAccess, {
   invalid: [
     {
       code: `const m = new Map();
-    const foo = Object.keys(m);`,
+        const foo = Object.keys(m);`,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
       code: `const m = new Map();
-      const foo = Object.values(m);`,
+        const foo = Object.values(m);`,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
       code: `const m = new Map();
-      const foo = Object.entities(m);`,
+        const foo = Object.entities(m);`,
+      errors: [{messageId: 'badMapAccess'}],
+    },
+    {
+      code: `const m = new Map();
+        const foo = _.keys(m);`,
+      errors: [{messageId: 'badMapAccess'}],
+    },
+    {
+      code: `const m = new Map();
+        const foo = _.values(m);`,
+      errors: [{messageId: 'badMapAccess'}],
+    },
+    {
+      code: `const m = new Map();
+        const foo = _.entities(m);`,
       errors: [{messageId: 'badMapAccess'}],
     }
   ]
