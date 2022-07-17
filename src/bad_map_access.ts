@@ -11,7 +11,7 @@ const allowedMethods = ['set', 'get', 'has', 'delete', 'forEach', 'clear', 'size
   'entities', 'keys', 'values'];
 
 // Names of objects that are not allowed to have Map as first argument in CallExpression
-const foriddenObjectNames = ['Object', '_', 'lodash']
+const foriddenObjectNames = ['Object', '_', 'lodash', 'Array']
 
 // Type: RuleModule<"noBadMapAccess", ...>
 export const noBadMapAccess = createRule({

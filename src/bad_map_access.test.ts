@@ -56,15 +56,27 @@ ruleTester.run('object and lodash methods', noBadMapAccess, {
   valid: [
     {
       code: `const m = new Map();
-    const foo = m.keys();`,
+        const foo = m.keys();`,
     },
     {
       code: `const m = new Map();
-    const foo = m.values();`,
+        const foo = m.values();`,
     },
     {
       code: `const m = new Map();
-      const foo = m.entities();`,
+        const foo = m.entities();`,
+    },
+    {
+      code: `const m = new Map();
+        const foo = Array.from(m.entities());`,
+    },
+    {
+      code: `const m = new Map();
+        const foo = Array.from(m.values());`,
+    },
+    {
+      code: `const m = new Map();
+        const foo = Array.from(m.keys());`,
     }
   ],
   invalid: [
@@ -96,6 +108,11 @@ ruleTester.run('object and lodash methods', noBadMapAccess, {
     {
       code: `const m = new Map();
         const foo = _.entities(m);`,
+      errors: [{messageId: 'badMapAccess'}],
+    },
+    {
+      code: `const m = new Map();
+        const foo = Array.from(m);`,
       errors: [{messageId: 'badMapAccess'}],
     }
   ]

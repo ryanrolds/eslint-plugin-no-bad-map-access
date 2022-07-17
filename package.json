@@ -1,12 +1,13 @@
 {
   "name": "eslint-plugin-no-bad-map-access",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Linter rules that flag incorrect ES6 Map access",
   "main": "built/index.js",
   "scripts": {
     "build": "npx tsc",
     "lint": "npx eslint ./src/*",
-    "test": "jest ./src/*.test.ts"
+    "test": "jest ./src/*.test.ts",
+    "publish": "npm build && npm publish"
   },
   "repository": {
     "type": "git",
