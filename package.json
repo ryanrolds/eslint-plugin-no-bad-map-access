@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "lint": "npx eslint ./src/*",
     "test": "jest ./src/*.test.ts",
-    "publish": "npm build && npm publish"
+    "publish": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
