@@ -13,7 +13,7 @@ Add the following to your `.eslintrc.json`:
 ```
 "rules": {
   ...
-  "no-bad-map-access/no-bad-map-access: error": "error"
+  "no-bad-map-access/no-bad-map-access": "error"
 }
 ...
 "plugins": [
