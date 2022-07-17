@@ -1,17 +1,20 @@
+import {CallExpression, Identifier, MemberExpression} from '@typescript-eslint/types/dist/generated/ast-spec';
 import {ESLintUtils} from '@typescript-eslint/utils';
+
 
 const createRule = ESLintUtils.RuleCreator(
   name => `https://example.com/rule/${name}`,
 );
 
 
-const allowedMethods = ['set', 'get', 'has', 'delete', 'forEach', 'clear', 'size'];
+const allowedMethods = ['set', 'get', 'has', 'delete', 'forEach', 'clear', 'size',
+  'entities', 'keys', 'values'];
 
 // Type: RuleModule<"badMapAccess", ...>
 export const badMapAccess = createRule({
   create(context) {
     return {
-      'MemberExpression'(node) {
+      MemberExpression(node) {
         // Do not report set/get
         if (node.property.type === 'Identifier' &&
           allowedMethods.indexOf(node.property.name) > -1) {
@@ -23,6 +26,28 @@ export const badMapAccess = createRule({
 
         // get identifier type
         const objectNode = parserServices.esTreeNodeToTSNodeMap.get(node.object);
+        const objectType = checker.getTypeAtLocation(objectNode);
+
+        if (objectType.symbol?.escapedName === "Map") {
+          context.report({
+            messageId: 'badMapAccess',
+            node: node,
+          });
+        }
+      },
+      'CallExpression > MemberExpression > Identifier[name="Object"]'(node: Identifier) {
+        const memberExpression = node.parent as MemberExpression;
+        const callExpression = memberExpression.parent as CallExpression;
+
+        if (callExpression.arguments.length === 0) {
+          return;
+        }
+
+        const parserServices = ESLintUtils.getParserServices(context);
+        const checker = parserServices.program.getTypeChecker();
+
+        // get identifier type
+        const objectNode = parserServices.esTreeNodeToTSNodeMap.get(callExpression.arguments[0]);
         const objectType = checker.getTypeAtLocation(objectNode);
 
         if (objectType.symbol?.escapedName === "Map") {
