@@ -1,7 +1,6 @@
 # No bad Map access
 
-An ESLint rule that uses TypeScript types to check if an ES6 Map is being accessed
-incorrectly.
+An [ESLint rule](https://eslint.org/) that uses [TypeScript plugin](https://github.com/typescript-eslint/typescript-eslint) to check if an [ES6 Map is being accessed incorrectly](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map#setting_object_properties).
 
 ## Usage
 
