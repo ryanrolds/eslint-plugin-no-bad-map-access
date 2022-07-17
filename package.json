@@ -1,0 +1,37 @@
+{
+  "name": "tslint-bad-generic-object-access",
+  "version": "0.0.1",
+  "description": "Linter rules that flag bad access of Map",
+  "main": "src/index.ts",
+  "scripts": {
+    "lint": "npx eslint ./src/*",
+    "test": "jest ./src/*.test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanrolds/eslint-bad-map-access.git"
+  },
+  "keywords": [
+    "eslint",
+    "typescript",
+    "map"
+  ],
+  "author": "ryanrolds@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryanrolds/eslint-bad-map-access/issues"
+  },
+  "homepage": "https://github.com/ryanrolds/eslint-bad-map-access#readme",
+  "dependencies": {
+    "@typescript-eslint/parser": "^5.30.6",
+    "@typescript-eslint/utils": "^5.30.6",
+    "jest": "^28.1.3",
+    "ts-jest": "^28.0.7"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.4.5",
+    "@types/jest": "^28.1.6",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "eslint": "^8.20.0"
+  }
+}
