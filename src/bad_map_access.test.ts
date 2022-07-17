@@ -30,3 +30,36 @@ ruleTester.run('map getting', badMapAccess, {
     errors: [{messageId: 'badMapAccess'}],
   }]
 });
+
+ruleTester.run('map has', badMapAccess, {
+  valid: [{
+    code: 'const m = new Map(); const foo = m.has("foo");',
+  }],
+  invalid: [{
+    code: 'const m = new Map(); !!m["foo"];',
+    // we can use messageId from the rule object
+    errors: [{messageId: 'badMapAccess'}],
+  }]
+});
+
+ruleTester.run('map delete', badMapAccess, {
+  valid: [{
+    code: 'const m = new Map(); const foo = m.delete("foo");',
+  }],
+  invalid: [{
+    code: 'const m = new Map(); delete m["foo"];',
+    // we can use messageId from the rule object
+    errors: [{messageId: 'badMapAccess'}],
+  }]
+});
+
+ruleTester.run('map size', badMapAccess, {
+  valid: [{
+    code: 'const m = new Map(); const foo = m.size;',
+  }],
+  invalid: [{
+    code: 'const m = new Map(); Object.keys(m["foo"]).length',
+    // we can use messageId from the rule object
+    errors: [{messageId: 'badMapAccess'}],
+  }]
+});

@@ -4,6 +4,9 @@ const createRule = ESLintUtils.RuleCreator(
   name => `https://example.com/rule/${name}`,
 );
 
+
+const allowedMethods = ['set', 'get', 'has', 'delete', 'forEach', 'clear', 'size'];
+
 // Type: RuleModule<"badMapAccess", ...>
 export const badMapAccess = createRule({
   create(context) {
@@ -11,7 +14,7 @@ export const badMapAccess = createRule({
       'MemberExpression'(node) {
         // Do not report set/get
         if (node.property.type === 'Identifier' &&
-          (node.property.name === 'set' || node.property.name === 'get')) {
+          allowedMethods.indexOf(node.property.name) > -1) {
           return
         }
 
