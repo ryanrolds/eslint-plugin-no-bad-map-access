@@ -25,8 +25,14 @@ ruleTester.run('flag accessing of Map properties', noBadMapAccess, {
     },
     {
       code: 'const m = new Map(); const foo = m.size;',
-    }
-
+    },
+    {
+      code: `
+        type Foo = Map<string, number>;; 
+        const f = new Foo();
+        const size = f.size;
+      `,
+    },
   ],
   invalid: [
     {
@@ -48,7 +54,15 @@ ruleTester.run('flag accessing of Map properties', noBadMapAccess, {
     {
       code: 'const m = new Map(); Object.keys(m).length',
       errors: [{messageId: 'badMapAccess'}],
-    }
+    },
+    {
+      code: `
+        type Foo = Map<string, number>; 
+        const f = new Foo();
+        const foo = f["foo"];
+      `,
+      errors: [{messageId: 'badMapAccess'}],
+    },
   ]
 });
 
