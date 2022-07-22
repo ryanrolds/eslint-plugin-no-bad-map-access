@@ -70,63 +70,82 @@ ruleTester.run('flag accessing of Map properties', noBadMapAccess, {
 ruleTester.run('object and lodash methods', noBadMapAccess, {
   valid: [
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = m.keys();`,
     },
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = m.values();`,
     },
     {
-      code: `const m = new Map();
-        const foo = m.entities();`,
+      code: `
+        const m = new Map();
+        const foo = m.entries();`,
     },
     {
-      code: `const m = new Map();
-        const foo = Array.from(m.entities());`,
+      code: `
+        const m = new Map();
+        const foo = Array.from(m.entries());`,
     },
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = Array.from(m.values());`,
     },
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = Array.from(m.keys());`,
-    }
+    },
+    {
+      code: `
+        const m = new Map();
+        Array.from(m.entries())
+      `,
+    },
   ],
   invalid: [
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = Object.keys(m);`,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = Object.values(m);`,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = Object.entities(m);`,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = _.keys(m);`,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = _.values(m);`,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = _.entities(m);`,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
-      code: `const m = new Map();
+      code: `
+        const m = new Map();
         const foo = Array.from(m);`,
       errors: [{messageId: 'badMapAccess'}],
     },

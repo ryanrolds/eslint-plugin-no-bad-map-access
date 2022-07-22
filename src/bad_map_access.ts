@@ -8,7 +8,7 @@ const createRule = ESLintUtils.RuleCreator(
 
 // Member access allowed on Map
 const allowedMethods = ['set', 'get', 'has', 'delete', 'forEach', 'clear', 'size',
-  'entities', 'keys', 'values'];
+  'entries', 'keys', 'values'];
 
 // Names of objects that are not allowed to have Map as first argument in CallExpression
 const foriddenObjectNames = ['Object', '_', 'lodash', 'Array']
