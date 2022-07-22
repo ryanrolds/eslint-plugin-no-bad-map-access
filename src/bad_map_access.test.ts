@@ -57,9 +57,10 @@ ruleTester.run('flag accessing of Map properties', noBadMapAccess, {
     },
     {
       code: `
-        type Foo = Map<string, number>; 
-        const f = new Foo();
-        const foo = f["foo"];
+        type Foo = Map<string, number>;
+        function bar(foo: Foo): number {
+          return foo["foo"];
+        }   
       `,
       errors: [{messageId: 'badMapAccess'}],
     },
@@ -128,6 +129,16 @@ ruleTester.run('object and lodash methods', noBadMapAccess, {
       code: `const m = new Map();
         const foo = Array.from(m);`,
       errors: [{messageId: 'badMapAccess'}],
-    }
+    },
+    {
+      code: `
+        type Foo = Map<string, number>;
+        function bar(foo: Foo): number[] {
+          return Object.values(foo);
+        }
+      `,
+      errors: [{messageId: 'badMapAccess'}],
+    },
   ]
 });
+
