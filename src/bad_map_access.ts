@@ -1,4 +1,4 @@
-import {CallExpression, Identifier, MemberExpression} from '@typescript-eslint/types/dist/generated/ast-spec';
+import {CallExpression, Identifier, MemberExpression, TSAsExpression} from '@typescript-eslint/types/dist/generated/ast-spec';
 import {ESLintUtils} from '@typescript-eslint/utils';
 
 
@@ -73,6 +73,25 @@ export const noBadMapAccess = createRule({
             messageId: 'badMapAccess',
             node: node,
           });
+        }
+      },
+      'TSAsExpression'(node: TSAsExpression) {
+        if (node.expression.type === 'ObjectExpression') {
+          // Get the TypeScript type checker
+          const parserServices = ESLintUtils.getParserServices(context);
+          const checker = parserServices.program.getTypeChecker();
+
+          const objectNode = parserServices.esTreeNodeToTSNodeMap.get(node);
+          const objectType = checker.getTypeAtLocation(objectNode);
+
+          //console.log(objectType);
+
+          if (objectType.symbol?.escapedName === "Map") {
+            context.report({
+              messageId: 'badMapAccess',
+              node: node,
+            });
+          }
         }
       }
     };

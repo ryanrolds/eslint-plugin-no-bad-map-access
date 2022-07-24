@@ -110,43 +110,50 @@ ruleTester.run('object and lodash methods', noBadMapAccess, {
     {
       code: `
         const m = new Map();
-        const foo = Object.keys(m);`,
+        const foo = Object.keys(m);
+      `,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
       code: `
         const m = new Map();
-        const foo = Object.values(m);`,
+        const foo = Object.values(m);
+      `,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
       code: `
         const m = new Map();
-        const foo = Object.entities(m);`,
+        const foo = Object.entities(m);
+      `,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
       code: `
         const m = new Map();
-        const foo = _.keys(m);`,
+        const foo = _.keys(m);
+      `,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
       code: `
         const m = new Map();
-        const foo = _.values(m);`,
+        const foo = _.values(m);
+      `,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
       code: `
         const m = new Map();
-        const foo = _.entities(m);`,
+        const foo = _.entities(m);
+      `,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
       code: `
         const m = new Map();
-        const foo = Array.from(m);`,
+        const foo = Array.from(m);
+      `,
       errors: [{messageId: 'badMapAccess'}],
     },
     {
@@ -161,3 +168,29 @@ ruleTester.run('object and lodash methods', noBadMapAccess, {
   ]
 });
 
+ruleTester.run('object as Map', noBadMapAccess, {
+  valid: [
+    {
+      code: `const foo = {} as Record<string, number>;`,
+    },
+    {
+      code: `
+        type Foo = Record<string, number>;
+        const foo = {} as Foo;
+      `,
+    },
+  ],
+  invalid: [
+    {
+      code: `const foo = {} as Map<string, number>;`,
+      errors: [{messageId: 'badMapAccess'}],
+    },
+    {
+      code: `
+        type Foo = Map<string, number>;
+        const foo = {} as Foo;
+      `,
+      errors: [{messageId: 'badMapAccess'}],
+    },
+  ]
+});
