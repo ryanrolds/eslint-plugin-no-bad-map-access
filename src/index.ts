@@ -1,5 +1,5 @@
-import {noBadMapAccess} from "./bad_map_access";
+import {noBadAccess} from "./bad_access";
 
 export const rules = {
-  "no-bad-map-access": noBadMapAccess,
+  "no-bad-map-access": noBadAccess,
 }

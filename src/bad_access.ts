@@ -13,8 +13,8 @@ const allowedMethods = ['set', 'get', 'has', 'delete', 'forEach', 'clear', 'size
 // Names of objects that are not allowed to have Map as first argument in CallExpression
 const foriddenObjectNames = ['Object', '_', 'lodash', 'Array']
 
-// Type: RuleModule<"noBadMapAccess", ...>
-export const noBadMapAccess = createRule({
+// Type: RuleModule<"noBadAccess", ...>
+export const noBadAccess = createRule({
   create(context) {
     return {
       // Get MemberExpressions and check if Identifier being called is a Map
@@ -35,9 +35,10 @@ export const noBadMapAccess = createRule({
         const objectType = checker.getTypeAtLocation(objectNode);
 
         // If Identifier is a map, then report invalid access
-        if (objectType.symbol?.escapedName === "Map") {
+        const name = objectType.symbol?.escapedName
+        if (name === "Map" || name === "Set") {
           context.report({
-            messageId: 'badMapAccess',
+            messageId: 'badAccess',
             node: node,
           });
         }
@@ -68,9 +69,10 @@ export const noBadMapAccess = createRule({
         const objectType = checker.getTypeAtLocation(objectNode);
 
         // If first argument is a map, then report invalid access
-        if (objectType.symbol?.escapedName === "Map") {
+        const name = objectType.symbol?.escapedName
+        if (name === "Map" || name === "Set") {
           context.report({
-            messageId: 'badMapAccess',
+            messageId: 'badAccess',
             node: node,
           });
         }
@@ -86,9 +88,10 @@ export const noBadMapAccess = createRule({
 
           //console.log(objectType);
 
-          if (objectType.symbol?.escapedName === "Map") {
+          const name = objectType.symbol?.escapedName
+          if (name === "Map" || name === "Set") {
             context.report({
-              messageId: 'badMapAccess',
+              messageId: 'badAccess',
               node: node,
             });
           }
@@ -100,11 +103,11 @@ export const noBadMapAccess = createRule({
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Access Map via methods methods',
+      description: 'Access Map/Set via methods methods',
       recommended: 'error',
     },
     messages: {
-      badMapAccess: 'Use Map methods instead of accessing properties',
+      badAccess: 'Use Map/Set methods instead of accessing properties',
     },
     schema: [],
   },

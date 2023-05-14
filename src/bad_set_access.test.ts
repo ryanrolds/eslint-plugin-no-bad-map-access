@@ -9,26 +9,26 @@ const ruleTester = new ESLintUtils.RuleTester({
   },
 });
 
-ruleTester.run('flag accessing of Map properties', noBadAccess, {
+ruleTester.run('flag accessing of Set properties', noBadAccess, {
   valid: [
     {
-      code: 'const m = new Map(); m.set("foo", 1);',
+      code: 'const m = new Set(); m.add("foo");',
     },
     {
-      code: 'const m = new Map(); const foo = m.get("foo");',
+      code: 'const m = new Set(); const foo = m.get("foo");',
     },
     {
-      code: 'const m = new Map(); const foo = m.has("foo");',
+      code: 'const m = new Set(); const foo = m.has("foo");',
     },
     {
-      code: 'const m = new Map(); const foo = m.delete("foo");',
+      code: 'const m = new Set(); const foo = m.delete("foo");',
     },
     {
-      code: 'const m = new Map(); const foo = m.size;',
+      code: 'const m = new Set(); const foo = m.size;',
     },
     {
       code: `
-        type Foo = Map<string, number>;; 
+        type Foo = Set<string>;; 
         const f = new Foo();
         const size = f.size;
       `,
@@ -36,28 +36,28 @@ ruleTester.run('flag accessing of Map properties', noBadAccess, {
   ],
   invalid: [
     {
-      code: 'const m = new Map(); m["foo"] = 1;',
+      code: 'const m = new Set(); m["foo"] = 1;',
       errors: [{messageId: 'badAccess'}],
     },
     {
-      code: 'const m = new Map(); const foot = m["foo"];',
+      code: 'const m = new Set(); const foot = m["foo"];',
       errors: [{messageId: 'badAccess'}],
     },
     {
-      code: 'const m = new Map(); !!m["foo"];',
+      code: 'const m = new Set(); !!m["foo"];',
       errors: [{messageId: 'badAccess'}],
     },
     {
-      code: 'const m = new Map(); delete m["foo"];',
+      code: 'const m = new Set(); delete m["foo"];',
       errors: [{messageId: 'badAccess'}],
     },
     {
-      code: 'const m = new Map(); Object.keys(m).length',
+      code: 'const m = new Set(); Object.keys(m).length',
       errors: [{messageId: 'badAccess'}],
     },
     {
       code: `
-        type Foo = Map<string, number>;
+        type Foo = Set<string, number>;
         function bar(foo: Foo): number {
           return foo["foo"];
         }   
@@ -71,37 +71,37 @@ ruleTester.run('object and lodash methods', noBadAccess, {
   valid: [
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = m.keys();`,
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = m.values();`,
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = m.entries();`,
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = Array.from(m.entries());`,
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = Array.from(m.values());`,
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = Array.from(m.keys());`,
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         Array.from(m.entries())
       `,
     },
@@ -109,56 +109,56 @@ ruleTester.run('object and lodash methods', noBadAccess, {
   invalid: [
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = Object.keys(m);
       `,
       errors: [{messageId: 'badAccess'}],
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = Object.values(m);
       `,
       errors: [{messageId: 'badAccess'}],
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = Object.entities(m);
       `,
       errors: [{messageId: 'badAccess'}],
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = _.keys(m);
       `,
       errors: [{messageId: 'badAccess'}],
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = _.values(m);
       `,
       errors: [{messageId: 'badAccess'}],
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = _.entities(m);
       `,
       errors: [{messageId: 'badAccess'}],
     },
     {
       code: `
-        const m = new Map();
+        const m = new Set();
         const foo = Array.from(m);
       `,
       errors: [{messageId: 'badAccess'}],
     },
     {
       code: `
-        type Foo = Map<string, number>;
+        type Foo = Set<string>;
         function bar(foo: Foo): number[] {
           return Object.values(foo);
         }
@@ -168,7 +168,7 @@ ruleTester.run('object and lodash methods', noBadAccess, {
   ]
 });
 
-ruleTester.run('object as Map', noBadAccess, {
+ruleTester.run('object as Set', noBadAccess, {
   valid: [
     {
       code: `const foo = {} as Record<string, number>;`,
@@ -182,12 +182,12 @@ ruleTester.run('object as Map', noBadAccess, {
   ],
   invalid: [
     {
-      code: `const foo = {} as Map<string, number>;`,
+      code: `const foo = {} as Set<string, number>;`,
       errors: [{messageId: 'badAccess'}],
     },
     {
       code: `
-        type Foo = Map<string, number>;
+        type Foo = Set<string, number>;
         const foo = {} as Foo;
       `,
       errors: [{messageId: 'badAccess'}],

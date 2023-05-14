@@ -1,6 +1,6 @@
-# No bad Map access
+# No bad Map/Set access
 
-An [ESLint rule](https://eslint.org/) that uses [TypeScript plugin](https://github.com/typescript-eslint/typescript-eslint) to check if an [ES6 Map is being accessed incorrectly](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map#setting_object_properties). Also looks for `{} as Map`, which is not a valid cast 
+An [ESLint rule](https://eslint.org/) that uses [TypeScript plugin](https://github.com/typescript-eslint/typescript-eslint) to check if an [ES6 Map or Set is being accessed incorrectly](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map#setting_object_properties). Also looks for `{} as Map/Set`, which is not a valid cast.
 
 ## Usage
 
